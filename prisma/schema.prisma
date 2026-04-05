@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Pol {
+  MUSKO
+  ZENSKO
+}
+
+enum Stepen {
+  III
+  IV
+}
+
+model Odeljenje {
+  id            Int       @id @default(autoincrement())
+  naziv         String    // "I-1"
+  razred        Int       // 1, 2, 3 ili 4
+  smer          String
+  stepen        Stepen    @default(IV)
+  jezik         String    // "Srpski" | "Bosanski"
+  razredni      String
+  skolskaGodina String    @default("2025/2026")
+  ucenici       Ucenik[]
+  kreiran       DateTime  @default(now())
+  azuriran      DateTime  @updatedAt
+}
+
+model Ucenik {
+  id               Int       @id @default(autoincrement())
+  redniBroj        Int
+  pol              Pol
+  ime              String
+  prezime          String
+  datumRodjenja    String
+  mestoRodjenja    String?
+  imeRoditelja     String?
+  adresa           String?
+  telefonUcenika   String?
+  telefonRoditelja String?
+  izborni          String?
+  straniJezik      String?
+  maternji         String?
+  napomena         String?
+  odeljenje        Odeljenje @relation(fields: [odeljenjeId], references: [id])
+  odeljenjeId      Int
+  kreiran          DateTime  @default(now())
+  azuriran         DateTime  @updatedAt
+}
+
+model UpisIspis {
+  id            Int      @id @default(autoincrement())
+  ime           String
+  prezime       String
+  odeljenje     String?
+  datumRodjenja String?
+  datumUpisa    String?
+  datumIspisa   String?
+  napomena      String?
+  kreiran       DateTime @default(now())
+}
