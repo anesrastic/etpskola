@@ -90,6 +90,7 @@ export async function buildPdfOdeljenje(
   ucenici: UcenikRow[],
   odeljenje: OdeljenjeInfo,
 ): Promise<Buffer> {
-  const element = React.createElement(SpiskoPDF, { ucenici, odeljenje });
-  return renderToBuffer(element);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const element = React.createElement(SpiskoPDF as any, { ucenici, odeljenje });
+  return renderToBuffer(element as any);
 }
