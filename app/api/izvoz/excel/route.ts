@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { buildExcelUcenici, buildExcelSviUcenici } from "@/lib/export/excel";
 
+export const runtime = "nodejs";
+
 export async function POST(request: NextRequest) {
   const { tip, odeljenjeId } = await request.json();
 

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { buildPdfOdeljenje } from "@/lib/export/pdf";
 
+export const runtime = "nodejs";
+
 export async function POST(request: NextRequest) {
   const { odeljenjeId } = await request.json();
 
