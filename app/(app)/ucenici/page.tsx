@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { Pol, Prisma } from "@prisma/client";
+import { Pol, Stepen, Prisma } from "@prisma/client";
 import { UcenikTable } from "@/components/ucenik-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,6 +29,7 @@ interface PageProps {
     odeljenjeId?: string;
     razred?: string;
     pol?: string;
+    stepen?: string;
     izborni?: string;
     straniJezik?: string;
     maternji?: string;
@@ -45,6 +46,7 @@ export default async function UceniciPage({ searchParams }: PageProps) {
   const odeljenjeId = sp.odeljenjeId ? parseInt(sp.odeljenjeId) : undefined;
   const razred = sp.razred ? parseInt(sp.razred) : undefined;
   const pol = sp.pol === "MUSKO" ? Pol.MUSKO : sp.pol === "ZENSKO" ? Pol.ZENSKO : undefined;
+  const stepen = sp.stepen === "III" ? Stepen.III : sp.stepen === "IV" ? Stepen.IV : undefined;
   const izborni = sp.izborni ?? "";
   const straniJezik = sp.straniJezik ?? "";
   const maternji = sp.maternji ?? "";
@@ -63,7 +65,7 @@ export default async function UceniciPage({ searchParams }: PageProps) {
     { prezime: { contains: q, mode: "insensitive" } },
   ];
   if (odeljenjeId) where.odeljenjeId = odeljenjeId;
-  if (razred) where.odeljenje = { razred };
+  if (razred || stepen) where.odeljenje = { ...(razred ? { razred } : {}), ...(stepen ? { stepen } : {}) };
   if (pol !== undefined) where.pol = { equals: pol };
   if (izborni) where.izborni = { contains: izborni, mode: "insensitive" };
   if (straniJezik) where.straniJezik = { contains: straniJezik, mode: "insensitive" };
@@ -114,6 +116,7 @@ export default async function UceniciPage({ searchParams }: PageProps) {
     if (odeljenjeId) base.odeljenjeId = String(odeljenjeId);
     if (razred) base.razred = String(razred);
     if (pol) base.pol = pol;
+    if (stepen) base.stepen = stepen;
     if (izborni) base.izborni = izborni;
     if (straniJezik) base.straniJezik = straniJezik;
     if (maternji) base.maternji = maternji;
@@ -129,6 +132,7 @@ export default async function UceniciPage({ searchParams }: PageProps) {
   if (odeljenjeId) filterBase.odeljenjeId = String(odeljenjeId);
   if (razred) filterBase.razred = String(razred);
   if (pol) filterBase.pol = pol;
+  if (stepen) filterBase.stepen = stepen;
   if (izborni) filterBase.izborni = izborni;
   if (straniJezik) filterBase.straniJezik = straniJezik;
   if (maternji) filterBase.maternji = maternji;
@@ -136,7 +140,7 @@ export default async function UceniciPage({ searchParams }: PageProps) {
   const filterStr = new URLSearchParams(filterBase).toString();
   const baseHref = `/ucenici${filterStr ? `?${filterStr}` : ""}`;
 
-  const hasFilters = !!(q || odeljenjeId || razred || pol || izborni || straniJezik || maternji || starost !== undefined);
+  const hasFilters = !!(q || odeljenjeId || razred || pol || stepen || izborni || straniJezik || maternji || starost !== undefined);
 
   return (
     <div>
@@ -190,6 +194,15 @@ export default async function UceniciPage({ searchParams }: PageProps) {
             <option value="">Oba pola</option>
             <option value="MUSKO">Muško</option>
             <option value="ZENSKO">Žensko</option>
+          </select>
+          <select
+            name="stepen"
+            defaultValue={sp.stepen ?? ""}
+            className="border border-brand-200 rounded-md px-3 py-2 text-sm bg-white text-slate-700"
+          >
+            <option value="">III i IV stepen</option>
+            <option value="III">III stepen</option>
+            <option value="IV">IV stepen</option>
           </select>
           <select
             name="izborni"
