@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     skolskaGodina: odeljenje.skolskaGodina,
   });
 
-  return new NextResponse(buf, {
+  return new NextResponse(new Uint8Array(buf), {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": `attachment; filename="Odeljenje-${odeljenje.naziv}.pdf"`,
