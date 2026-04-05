@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { Pol } from "@prisma/client";
+import { Pol, Prisma } from "@prisma/client";
 import { UcenikTable } from "@/components/ucenik-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,14 +57,14 @@ export default async function UceniciPage({ searchParams }: PageProps) {
   const noPagination = !!odeljenjeId;
   const needsMemory = sort === "datumRodjenja" || starost !== undefined || noPagination;
 
-  const where: Record<string, unknown> = {};
+  const where: Prisma.UcenikWhereInput = {};
   if (q) where.OR = [
     { ime: { contains: q, mode: "insensitive" } },
     { prezime: { contains: q, mode: "insensitive" } },
   ];
   if (odeljenjeId) where.odeljenjeId = odeljenjeId;
   if (razred) where.odeljenje = { razred };
-  if (pol !== undefined) where.pol = pol;
+  if (pol !== undefined) where.pol = { equals: pol };
   if (izborni) where.izborni = { contains: izborni, mode: "insensitive" };
   if (straniJezik) where.straniJezik = { contains: straniJezik, mode: "insensitive" };
   if (maternji) where.maternji = { contains: maternji, mode: "insensitive" };
