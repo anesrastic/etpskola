@@ -34,8 +34,8 @@ export function UpisIspisForm() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="bg-brand-600 hover:bg-brand-700">+ Dodaj unos</Button>
+      <DialogTrigger render={<Button className="bg-brand-600 hover:bg-brand-700" />}>
+        + Dodaj unos
       </DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>
