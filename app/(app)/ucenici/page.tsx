@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { UcenikTable } from "@/components/ucenik-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { LinkButton } from "@/components/ui/link-button";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -44,9 +45,9 @@ export default async function UceniciPage({ searchParams }: PageProps) {
     <div>
       <div className="flex justify-between items-center mb-5">
         <h1 className="text-2xl font-bold text-brand-900">Učenici</h1>
-        <Button asChild className="bg-brand-600 hover:bg-brand-700">
-          <Link href="/ucenici/novi">+ Novi učenik</Link>
-        </Button>
+        <LinkButton href="/ucenici/novi" className="bg-brand-600 hover:bg-brand-700">
+          + Novi učenik
+        </LinkButton>
       </div>
 
       {/* Toolbar */}
@@ -88,25 +89,25 @@ export default async function UceniciPage({ searchParams }: PageProps) {
         <span>Prikazano {(page - 1) * limit + 1}–{Math.min(page * limit, total)} od {total} učenika</span>
         <div className="flex gap-1">
           {page > 1 && (
-            <Button asChild variant="outline" size="sm" className="border-brand-200">
-              <Link href={`/ucenici?q=${q}&page=${page - 1}`}>← Preth.</Link>
-            </Button>
+            <LinkButton href={`/ucenici?q=${q}&page=${page - 1}`} variant="outline" size="sm" className="border-brand-200">
+              ← Preth.
+            </LinkButton>
           )}
           {Array.from({ length: Math.min(pages, 5) }, (_, i) => i + 1).map((p) => (
-            <Button
+            <LinkButton
               key={p}
-              asChild
+              href={`/ucenici?q=${q}&page=${p}`}
               variant={p === page ? "default" : "outline"}
               size="sm"
               className={p === page ? "bg-brand-600" : "border-brand-200"}
             >
-              <Link href={`/ucenici?q=${q}&page=${p}`}>{p}</Link>
-            </Button>
+              {p}
+            </LinkButton>
           ))}
           {page < pages && (
-            <Button asChild variant="outline" size="sm" className="border-brand-200">
-              <Link href={`/ucenici?q=${q}&page=${page + 1}`}>Sled. →</Link>
-            </Button>
+            <LinkButton href={`/ucenici?q=${q}&page=${page + 1}`} variant="outline" size="sm" className="border-brand-200">
+              Sled. →
+            </LinkButton>
           )}
         </div>
       </div>

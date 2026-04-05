@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { LinkButton } from "@/components/ui/link-button";
 import { Badge } from "@/components/ui/badge";
 import { UcenikTable } from "@/components/ucenik-table";
 
@@ -27,12 +27,12 @@ export default async function OdeljenjeDetailPage({ params }: { params: Promise<
           <span className="text-brand-900 font-semibold">{odeljenje.naziv}</span>
         </div>
         <div className="flex gap-2">
-          <Button asChild variant="outline" className="border-brand-200">
-            <Link href={`/izvoz?odeljenjeId=${odeljenje.id}`}>📄 Izvezi spisak</Link>
-          </Button>
-          <Button asChild className="bg-brand-600 hover:bg-brand-700">
-            <Link href={`/odeljenja/${odeljenje.id}/uredi`}>✏️ Uredi odeljenje</Link>
-          </Button>
+          <LinkButton href={`/izvoz?odeljenjeId=${odeljenje.id}`} variant="outline" className="border-brand-200">
+            📄 Izvezi spisak
+          </LinkButton>
+          <LinkButton href={`/odeljenja/${odeljenje.id}/uredi`} className="bg-brand-600 hover:bg-brand-700">
+            ✏️ Uredi odeljenje
+          </LinkButton>
         </div>
       </div>
 
@@ -70,9 +70,9 @@ export default async function OdeljenjeDetailPage({ params }: { params: Promise<
       {/* Učenici */}
       <div className="flex justify-between items-center mb-3">
         <h2 className="font-semibold text-brand-900">Učenici odeljenja</h2>
-        <Button asChild size="sm" className="bg-brand-600 hover:bg-brand-700">
-          <Link href={`/ucenici/novi?odeljenjeId=${odeljenje.id}`}>+ Dodaj učenika</Link>
-        </Button>
+        <LinkButton href={`/ucenici/novi?odeljenjeId=${odeljenje.id}`} size="sm" className="bg-brand-600 hover:bg-brand-700">
+          + Dodaj učenika
+        </LinkButton>
       </div>
       <UcenikTable ucenici={odeljenje.ucenici.map((u) => ({ ...u, odeljenje: { naziv: odeljenje.naziv } }))} showOdeljenje={false} />
     </div>

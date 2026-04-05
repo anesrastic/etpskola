@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { LinkButton } from "@/components/ui/link-button";
 
 interface Ucenik {
   id: number;
@@ -56,12 +55,12 @@ export function UcenikTable({ ucenici, showOdeljenje = true }: UcenikTableProps)
               <td className="px-4 py-2 text-slate-600">{u.izborni || "—"}</td>
               <td className="px-4 py-2 text-center">
                 <div className="flex gap-1 justify-center">
-                  <Button asChild size="sm" variant="outline" className="h-7 px-2 text-xs border-brand-200">
-                    <Link href={`/ucenici/${u.id}`}>👁 Pregled</Link>
-                  </Button>
-                  <Button asChild size="sm" variant="outline" className="h-7 px-2 text-xs border-brand-200">
-                    <Link href={`/ucenici/${u.id}/uredi`}>✏️</Link>
-                  </Button>
+                  <LinkButton href={`/ucenici/${u.id}`} size="sm" variant="outline" className="h-7 px-2 text-xs border-brand-200">
+                    👁 Pregled
+                  </LinkButton>
+                  <LinkButton href={`/ucenici/${u.id}/uredi`} size="sm" variant="outline" className="h-7 px-2 text-xs border-brand-200">
+                    ✏️
+                  </LinkButton>
                 </div>
               </td>
             </tr>

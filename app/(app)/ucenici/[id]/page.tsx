@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { LinkButton } from "@/components/ui/link-button";
 import { DeleteUcenikButton } from "@/components/delete-ucenik-button";
 
 export const dynamic = "force-dynamic";
@@ -34,9 +34,9 @@ export default async function UcenikPage({ params }: { params: Promise<{ id: str
           <span className="text-brand-900 font-semibold">{ucenik.prezime} {ucenik.ime}</span>
         </div>
         <div className="flex gap-2">
-          <Button asChild variant="outline" className="border-brand-200">
-            <Link href={`/ucenici/${ucenik.id}/uredi`}>✏️ Uredi podatke</Link>
-          </Button>
+          <LinkButton href={`/ucenici/${ucenik.id}/uredi`} variant="outline" className="border-brand-200">
+            ✏️ Uredi podatke
+          </LinkButton>
         </div>
       </div>
 
