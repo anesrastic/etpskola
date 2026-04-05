@@ -20,7 +20,26 @@ export default async function UrediUcenikPage({ params }: { params: Promise<{ id
         <span className="mx-2">/</span>
         <span className="text-brand-900 font-semibold">Uredi podatke</span>
       </div>
-      <UcenikForm odeljenja={odeljenja} defaultValues={{ ...ucenik, pol: ucenik.pol as string }} ucenikId={ucenik.id} />
+      <UcenikForm
+        odeljenja={odeljenja}
+        defaultValues={{
+          pol: ucenik.pol as string,
+          ime: ucenik.ime,
+          prezime: ucenik.prezime,
+          datumRodjenja: ucenik.datumRodjenja,
+          odeljenjeId: ucenik.odeljenjeId,
+          mestoRodjenja: ucenik.mestoRodjenja ?? undefined,
+          imeRoditelja: ucenik.imeRoditelja ?? undefined,
+          adresa: ucenik.adresa ?? undefined,
+          telefonUcenika: ucenik.telefonUcenika ?? undefined,
+          telefonRoditelja: ucenik.telefonRoditelja ?? undefined,
+          izborni: ucenik.izborni ?? undefined,
+          straniJezik: ucenik.straniJezik ?? undefined,
+          maternji: ucenik.maternji ?? undefined,
+          napomena: ucenik.napomena ?? undefined,
+        }}
+        ucenikId={ucenik.id}
+      />
     </div>
   );
 }
