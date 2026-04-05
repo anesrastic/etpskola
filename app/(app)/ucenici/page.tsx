@@ -69,9 +69,12 @@ export default async function UceniciPage({ searchParams }: PageProps) {
   if (straniJezik) where.straniJezik = { contains: straniJezik, mode: "insensitive" };
   if (maternji) where.maternji = { contains: maternji, mode: "insensitive" };
 
+  // DB handles name sorting; JS handles date sorting (string field)
   const dbOrderBy = sort === "ime"
     ? [{ ime: dir }, { prezime: dir }]
-    : [{ prezime: dir as "asc" | "desc" }, { ime: dir as "asc" | "desc" }];
+    : sort === "prezime"
+    ? [{ prezime: dir as "asc" | "desc" }, { ime: dir as "asc" | "desc" }]
+    : [{ prezime: "asc" as const }, { ime: "asc" as const }]; // fallback when sorting by date
 
   const [odeljenja, izborniVrednosti, stranJeziciVrednosti, maternjVrednosti, fetched] = await Promise.all([
     db.odeljenje.findMany({ orderBy: [{ razred: "asc" }, { naziv: "asc" }] }),
@@ -81,7 +84,7 @@ export default async function UceniciPage({ searchParams }: PageProps) {
     db.ucenik.findMany({
       where,
       include: { odeljenje: { select: { naziv: true } } },
-      orderBy: needsMemory ? [{ prezime: "asc" }, { ime: "asc" }] : dbOrderBy,
+      orderBy: dbOrderBy, // always applied; JS only overrides for datumRodjenja
       ...(needsMemory ? {} : { skip: (page - 1) * limit, take: limit }),
     }),
   ]);
