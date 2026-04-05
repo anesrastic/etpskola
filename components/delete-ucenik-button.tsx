@@ -19,10 +19,10 @@ export function DeleteUcenikButton({ id }: { id: number }) {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="outline" size="sm" className="border-red-200 text-red-500 hover:bg-red-50">
-          🗑 Obriši učenika
-        </Button>
+      <AlertDialogTrigger
+        render={<Button variant="outline" size="sm" className="border-red-200 text-red-500 hover:bg-red-50" />}
+      >
+        🗑 Obriši učenika
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
