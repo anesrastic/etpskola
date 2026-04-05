@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       skolskaGodina: odeljenje.skolskaGodina,
     });
 
-    return new NextResponse(buf, {
+    return new NextResponse(new Uint8Array(buf), {
       headers: {
         "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "Content-Disposition": `attachment; filename="Odeljenje-${odeljenje.naziv}.xlsx"`,
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     sviUcenici.map((u) => ({ ...u, odeljenjeNaziv: u.odeljenje.naziv }))
   );
 
-  return new NextResponse(buf, {
+  return new NextResponse(new Uint8Array(buf), {
     headers: {
       "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       "Content-Disposition": 'attachment; filename="Svi-ucenici.xlsx"',
