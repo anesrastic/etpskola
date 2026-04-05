@@ -1,0 +1,24 @@
+import { getIronSession, IronSession } from "iron-session";
+import { cookies } from "next/headers";
+
+export interface SessionData {
+  isLoggedIn: boolean;
+}
+
+export const sessionOptions = {
+  password: process.env.SESSION_SECRET as string,
+  cookieName: "etpskola_session",
+  cookieOptions: {
+    secure: process.env.NODE_ENV === "production",
+    httpOnly: true,
+    maxAge: 60 * 60 * 8, // 8 sati
+  },
+};
+
+export async function getSession(): Promise<IronSession<SessionData>> {
+  const session = await getIronSession<SessionData>(
+    await cookies(),
+    sessionOptions
+  );
+  return session;
+}
