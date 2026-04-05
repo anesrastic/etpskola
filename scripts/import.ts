@@ -54,6 +54,21 @@ function cleanStr(value: unknown): string | null {
   return str.length > 0 && str !== "-" && str !== "-----" ? str : null;
 }
 
+const IZBORNI_NORMALIZACIJA: Record<string, string> = {
+  "verska i": "Verska I.",
+  "verska i.": "Verska I.",
+  "verska i ": "Verska I.",
+  "verska p": "Verska P.",
+  "verska p.": "Verska P.",
+  "građansko": "Građansko",
+  "gradjansko": "Građansko",
+};
+
+function normalizujIzborni(value: string | null): string | null {
+  if (!value) return null;
+  return IZBORNI_NORMALIZACIJA[value.toLowerCase().trim()] ?? value;
+}
+
 function cleanPhone(value: unknown): string | null {
   if (!value) return null;
   const str = String(value).trim();
@@ -124,7 +139,7 @@ async function importSheet(wb: XLSX.WorkBook, sheetName: string) {
     const adresa = cleanStr(row[col++]);
     const telefonUcenika = cleanPhone(row[col++]);
     const telefonRoditelja = cleanPhone(row[col++]);
-    const izborni = cleanStr(row[col++]);
+    const izborni = normalizujIzborni(cleanStr(row[col++]));
     const straniJezik = cleanStr(row[col++]);
     const maternji = cleanStr(row[col++]);
     const napomena = cleanStr(row[col++]);
