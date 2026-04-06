@@ -37,11 +37,9 @@ export default function LoginPage() {
     <div className="min-h-screen bg-brand-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="eTPŠkola" className="h-14 w-auto" />
-          </div>
-          <p className="text-sm text-slate-500">Sistem za upravljanje učenicima</p>
+          <div className="text-4xl mb-3">🏫</div>
+          <h1 className="text-2xl font-bold text-brand-900">eTPŠkola</h1>
+          <p className="text-sm text-slate-500 mt-1">Sistem za upravljanje učenicima</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
