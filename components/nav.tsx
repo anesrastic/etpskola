@@ -11,6 +11,7 @@ const navItems = [
   { href: "/odeljenja", label: "🏫 Odeljenja" },
   { href: "/upis-ispis", label: "📋 Upis / Ispis" },
   { href: "/izvoz", label: "📄 Izvoz" },
+  { href: "/statistika", label: "📈 Statistika" },
 ];
 
 export function Nav() {
