@@ -154,17 +154,17 @@ export default async function UceniciPage({ searchParams }: PageProps) {
       {/* Toolbar */}
       <form className="space-y-2 mb-5">
         {/* Red 1: pretraga i odeljenje */}
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-2">
           <Input
             name="q"
             defaultValue={q}
             placeholder="🔍 Pretraži po imenu ili prezimenu..."
-            className="flex-1 border-brand-200"
+            className="flex-1 min-w-[180px] border-brand-200"
           />
           <select
             name="odeljenjeId"
             defaultValue={odeljenjeId ?? ""}
-            className="border border-brand-200 rounded-md px-3 py-2 text-sm bg-white text-slate-700 min-w-[140px]"
+            className="border border-brand-200 rounded-md px-3 py-2 text-sm bg-white text-slate-700 min-w-[130px]"
           >
             <option value="">Sva odeljenja</option>
             {odeljenja.map((o) => (
@@ -185,7 +185,7 @@ export default async function UceniciPage({ searchParams }: PageProps) {
         </div>
 
         {/* Red 2: napredni filteri */}
-        <div className="flex gap-3 flex-wrap">
+        <div className="flex gap-2 flex-wrap">
           <select
             name="pol"
             defaultValue={sp.pol ?? ""}

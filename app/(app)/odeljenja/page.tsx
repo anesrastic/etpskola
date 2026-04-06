@@ -22,7 +22,7 @@ export default async function OdeljenjaPage() {
         lista.length > 0 && (
           <div key={razred} className="mb-8">
             <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">{naziv}</h2>
-            <div className="grid grid-cols-3 gap-4 xl:grid-cols-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {lista.map((o) => (
                 <OdeljenjeCard
                   key={o.id}

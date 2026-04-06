@@ -15,10 +15,16 @@ const CLASS_SHEETS = [
 
 const razredMap: Record<string, number> = { "I": 1, "II": 2, "III": 3, "IV": 4 };
 
+const SMER_NORMALIZACIJA: Record<string, string> = {
+  "Mehaničar motornih vozila / Bravar zavarivač": "Mehaničar motornih vozila / Bravar-zavarivač",
+  "Veterinraski tehničar": "Veterinarski tehničar",
+};
+
 function extractSmer(row0: unknown[]): string {
   for (const cell of row0) {
     if (typeof cell === "string" && cell.trim().length > 3 && cell.trim() !== "-") {
-      return cell.replace(/\s*\([^)]+\)\s*$/, "").trim();
+      const smer = cell.replace(/\s*\([^)]+\)\s*$/, "").trim();
+      return SMER_NORMALIZACIJA[smer] ?? smer;
     }
   }
   return "";

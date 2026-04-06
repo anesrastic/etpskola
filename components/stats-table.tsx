@@ -7,11 +7,11 @@ interface StatsTableProps {
 
 export function StatsTable({ title, headers, rows, totalRow }: StatsTableProps) {
   return (
-    <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+    <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
       <div className="px-4 py-3 border-b border-slate-100">
         <h2 className="font-semibold text-brand-900 text-sm">{title}</h2>
       </div>
-      <table className="w-full text-sm">
+      <table className="w-full min-w-[400px] text-sm">
         <thead>
           <tr className="bg-brand-50 border-b border-brand-100">
             {headers.map((h, i) => (

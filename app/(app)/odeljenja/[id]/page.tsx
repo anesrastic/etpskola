@@ -20,13 +20,13 @@ export default async function OdeljenjeDetailPage({ params }: { params: Promise<
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-5">
         <div className="text-sm text-slate-500">
           <Link href="/odeljenja" className="text-brand-600 hover:underline">← Odeljenja</Link>
           <span className="mx-2">/</span>
           <span className="text-brand-900 font-semibold">{odeljenje.naziv}</span>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <LinkButton href={`/izvoz?odeljenjeId=${odeljenje.id}`} variant="outline" className="border-brand-200">
             📄 Izvezi spisak
           </LinkButton>
@@ -38,17 +38,17 @@ export default async function OdeljenjeDetailPage({ params }: { params: Promise<
 
       {/* Info kartica */}
       <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-5">
-        <div className="bg-gradient-to-r from-brand-900 to-brand-600 p-5 flex items-center gap-4">
-          <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center font-bold text-white text-xl">
+        <div className="bg-gradient-to-r from-brand-900 to-brand-600 p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 rounded-xl flex items-center justify-center font-bold text-white text-base sm:text-xl shrink-0">
             {odeljenje.naziv}
           </div>
           <div>
-            <div className="text-xl font-bold text-white">Odeljenje {odeljenje.naziv}</div>
+            <div className="text-lg sm:text-xl font-bold text-white">Odeljenje {odeljenje.naziv}</div>
             <div className="text-sm text-green-300">{odeljenje.skolskaGodina} · {odeljenje._count.ucenici} učenika</div>
           </div>
         </div>
-        <div className="p-5 grid grid-cols-4 gap-5">
-          <div className="col-span-2">
+        <div className="p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div className="sm:col-span-2">
             <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Smer / Profil</div>
             <div className="text-sm font-medium text-slate-800">{odeljenje.smer}</div>
           </div>
@@ -60,7 +60,7 @@ export default async function OdeljenjeDetailPage({ params }: { params: Promise<
             <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Jezik nastave</div>
             <div className="text-sm font-medium text-slate-800">{odeljenje.jezik}</div>
           </div>
-          <div>
+          <div className="sm:col-span-2 lg:col-span-4">
             <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Razredni starešina</div>
             <div className="text-sm font-medium text-slate-800">{odeljenje.razredni}</div>
           </div>

@@ -35,14 +35,14 @@ export default async function UpisIspisPage({ searchParams }: PageProps) {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-5">
         <h1 className="text-2xl font-bold text-brand-900">Upis / Ispis</h1>
         <UpisIspisForm />
       </div>
 
       {/* Toolbar */}
-      <form className="flex gap-3 mb-5">
-        <input name="q" defaultValue={q} placeholder="🔍 Pretraži..." className="flex-1 border border-brand-200 rounded-md px-3 py-2 text-sm" />
+      <form className="flex flex-wrap gap-2 mb-5">
+        <input name="q" defaultValue={q} placeholder="🔍 Pretraži..." className="flex-1 min-w-[160px] border border-brand-200 rounded-md px-3 py-2 text-sm" />
         <select name="filter" defaultValue={filter} className="border border-brand-200 rounded-md px-3 py-2 text-sm bg-white">
           <option value="sve">Sve</option>
           <option value="upisani">Samo upisani</option>
@@ -51,7 +51,7 @@ export default async function UpisIspisPage({ searchParams }: PageProps) {
         <Button type="submit" variant="outline" className="border-brand-200">Filtriraj</Button>
       </form>
 
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-brand-50 border-b border-brand-100">

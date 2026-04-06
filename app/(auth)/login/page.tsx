@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,12 +35,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-50 flex items-center justify-center">
+    <div className="min-h-screen bg-brand-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="text-4xl mb-3">🏫</div>
-          <h1 className="text-2xl font-bold text-brand-900">eTPŠkola</h1>
-          <p className="text-sm text-slate-500 mt-1">Sistem za upravljanje učenicima</p>
+          <div className="flex justify-center mb-4">
+            <Image src="/logo.png" alt="eTPŠkola" width={180} height={44} className="h-12 w-auto" priority />
+          </div>
+          <p className="text-sm text-slate-500">Sistem za upravljanje učenicima</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

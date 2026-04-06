@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -33,9 +34,9 @@ export function Nav() {
     <nav className="bg-brand-900">
       {/* Top bar */}
       <div className="px-5 h-13 flex items-center gap-1">
-        <span className="text-white font-bold text-base mr-6 shrink-0 flex-1 md:flex-none">
-          🏫 eTPŠkola
-        </span>
+        <Link href="/" className="flex items-center mr-6 shrink-0 flex-1 md:flex-none">
+          <Image src="/logo.png" alt="eTPŠkola" width={120} height={30} className="h-8 w-auto brightness-0 invert" priority />
+        </Link>
 
         {/* Desktop nav links */}
         <div className="hidden md:flex gap-1 flex-1">
