@@ -12,9 +12,16 @@ interface Ucenik {
   telefonUcenika: string | null;
   straniJezik: string | null;
   izborni: string | null;
+  napomena: string | null;
   redniBroj: number;
   odeljenje?: { naziv: string };
   odeljenjeId?: number;
+}
+
+const NAPOMENA_UPOZORENJE = /ispisan|preminuo|prešao na vanredno|presao na vanredno/i;
+
+function isUcenik(napomena: string | null): boolean {
+  return !!napomena && NAPOMENA_UPOZORENJE.test(napomena);
 }
 
 interface UcenikTableProps {
@@ -75,7 +82,7 @@ export function UcenikTable({ ucenici, showOdeljenje = true, sort, dir, baseHref
             </tr>
           )}
           {ucenici.map((u, i) => (
-            <tr key={u.id} className={`border-t border-slate-50 hover:bg-brand-50/40 ${i % 2 === 1 ? "bg-slate-50/30" : ""}`}>
+            <tr key={u.id} className={`border-t border-slate-50 ${isUcenik(u.napomena) ? "bg-red-50 hover:bg-red-100/70" : `hover:bg-brand-50/40 ${i % 2 === 1 ? "bg-slate-50/30" : ""}`}`}>
               {!showOdeljenje && <td className="px-4 py-2 text-slate-400">{u.redniBroj}</td>}
               <td className="px-4 py-2 font-semibold text-brand-800">{u.prezime}</td>
               <td className="px-4 py-2 text-slate-700">{u.ime}</td>
