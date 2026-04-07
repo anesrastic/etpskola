@@ -65,7 +65,7 @@ export function UcenikTable({ ucenici, showOdeljenje = true, sort, dir, baseHref
             {!showOdeljenje && <th className="px-4 py-3 text-left text-slate-500 font-medium w-10">Br.</th>}
             <SortHeader label="Prezime" column="prezime" sort={sort} dir={dir} baseHref={baseHref} />
             <SortHeader label="Ime" column="ime" sort={sort} dir={dir} baseHref={baseHref} />
-            {showOdeljenje && <th className="px-4 py-3 text-left text-slate-500 font-medium">Odeljenje</th>}
+            {showOdeljenje && <SortHeader label="Odeljenje" column="odeljenje" sort={sort} dir={dir} baseHref={baseHref} />}
             <SortHeader label="Datum rođenja" column="datumRodjenja" sort={sort} dir={dir} baseHref={baseHref} />
             <th className="px-4 py-3 text-left text-slate-500 font-medium">Telefon</th>
             <th className="px-4 py-3 text-left text-slate-500 font-medium">Strani jezik</th>

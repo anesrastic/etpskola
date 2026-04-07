@@ -76,6 +76,8 @@ export default async function UceniciPage({ searchParams }: PageProps) {
     ? [{ ime: dir }, { prezime: dir }]
     : sort === "prezime"
     ? [{ prezime: dir as "asc" | "desc" }, { ime: dir as "asc" | "desc" }]
+    : sort === "odeljenje"
+    ? [{ odeljenje: { naziv: dir as "asc" | "desc" } }, { prezime: "asc" as const }]
     : [{ prezime: "asc" as const }, { ime: "asc" as const }]; // fallback when sorting by date
 
   const [odeljenja, izborniVrednosti, stranJeziciVrednosti, maternjVrednosti, fetched] = await Promise.all([
