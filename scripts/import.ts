@@ -179,26 +179,26 @@ async function importUpisIspis(wb: XLSX.WorkBook) {
   const ws = wb.Sheets["UPIS-ISPIS"];
   if (!ws) return;
 
-  const rows: unknown[][] = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null });
+  // raw: false daje formatirane stringove — sprečava da "I-1", "I-2" budu protumačeni kao datumi
+  const rows: unknown[][] = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null, raw: false });
+  // raw: true zadržavamo za datumske kolone (upis/ispis) gdje trebamo numeričke vrijednosti
+  const rawRows: unknown[][] = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null });
 
   let count = 0;
   for (let i = 3; i < rows.length; i++) {
     const row = rows[i];
+    const rawRow = rawRows[i];
     if (!row || !row[1]) continue;
 
     const ime = (row[1] as string)?.trim() ?? "";
     const prezime = (row[2] as string)?.trim() ?? "";
     if (!ime || !prezime) continue;
 
-    // Kolona "odeljenje" može biti Excel serijski datum — konvertujemo u string
-    const odeljenjeRaw = row[3];
-    const odeljenje = typeof odeljenjeRaw === "number"
-      ? excelDateToStr(odeljenjeRaw)
-      : cleanStr(odeljenjeRaw);
+    const odeljenje = cleanStr(row[3]);
 
-    const datumRodjenja = cleanStr(row[4]);
-    const datumUpisa = cleanStr(row[5]);
-    const datumIspisa = cleanStr(row[6]);
+    const datumRodjenja = cleanStr(rawRow?.[4]);
+    const datumUpisa = cleanStr(rawRow?.[5]);
+    const datumIspisa = cleanStr(rawRow?.[6]);
     const napomena = cleanStr(row[7]);
 
     await db.upisIspis.create({
